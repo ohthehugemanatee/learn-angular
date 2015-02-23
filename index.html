@@ -9,10 +9,8 @@
 <div ng-controller="StoreController as store" >
     <div ng-repeat="product in store.products | orderBy:'price'">
         <div ng-hide="product.soldOut">
-            <h1>{{product.name | uppercase}}</h1>
-            <h2>{{product.price | currency}}</h2>
+            <h3 ng-include="'product-title.html'"></h3>
             <button ng-show="product.canPurchase">Add to Cart</button>
-
             <section ng-controller="PanelController as panel">
                 <ul class="nav nav-pills">
                     <li ng-class="{ active:panel.isSelected(1) }">
