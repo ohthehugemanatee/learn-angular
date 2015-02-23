@@ -35,7 +35,26 @@
                 </div>
                 <div class="panel" ng-show="panel.isSelected(3)">
                     <h4>Reviews</h4>
-                    <p>None yet.</p>
+                    <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
+                        <blockquote>
+                            <b>Stars: {{reviewCtrl.review.stars}}</b>
+                            <p>{{reviewCtrl.review.body}}</p>
+                            <cite>by: {{reviewCtrl.review.author}}</cite>
+                        </blockquote>
+                        <select ng-model="reviewCtrl.review.stars" ng-options="stars for stars in [5,4,3,2,1]" title="Stars" required>
+                            <option value="">Rate this product</option>
+                        </select>
+                        <textarea ng-model="reviewCtrl.review.body" required> </textarea>
+                        <label>by:</label>
+                        <input type="email" ng-model="reviewCtrl.review.author" required />
+                        <div>review form is {{reviewForm.$valid}}</div>
+                        <input type="submit" value="Submit" />
+                    </form>
+                    <blockquote ng-repeat="review in product.reviews">
+                        <b>Stars: {{review.stars}}</b>
+                        <p>{{review.body}}</p>
+                        <cite>by: {{review.author}}</cite>
+                    </blockquote>
                 </div>
             </section>
         </div>
